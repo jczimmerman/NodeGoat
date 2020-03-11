@@ -61,7 +61,6 @@ function SessionHandler(db) {
             //var invalidPasswordErrorMessage = "Invalid login credentials";
             if (err) {
                 if (err.noSuchUser) {
-                    console.log('Error: attempt to login with invalid user: ', userName);
 
                     // Fix for A1 - 3 Log Injection - encode/sanitize input for CRLF Injection
                     // that could result in log forging:
@@ -69,11 +68,11 @@ function SessionHandler(db) {
                     var ESAPI = require('node-esapi');
                     // - Step 2: Encode the user input that will be logged in the correct context
                     // following are a few examples:
-                    console.log('Error: attempt to login with invalid user: %s', ESAPI.encoder().encodeForHTML(userName));
+                    //console.log('Error: attempt to login with invalid user: %s', ESAPI.encoder().encodeForHTML(userName));
                     //console.log('Error: attempt to login with invalid user: %s', ESAPI.encoder().encodeForJavaScript(userName));
                     //console.log('Error: attempt to login with invalid user: %s', ESAPI.encoder().encodeForURL(userName));
                     // or if you know that this is a CRLF vulnerability you can target this specifically as follows:
-                    //console.log('Error: attempt to login with invalid user: %s', userName.replace(/(\r\n|\r|\n)/g, '_'));
+                    console.log('Error: attempt to login with invalid user: %s', userName.replace(/(\r\n|\r|\n)/g, '_'));
 
                     return res.render("login", {
                         userName: userName,
